@@ -1,7 +1,7 @@
-# BS721 Spec: Non Fungible Tokens
+# BS721 Spec: Non-Fungible Tokens
 
 BS721 is a specification for non-fungible tokens based on CosmWasm 721.
-The name and design is based on Ethereum's ERC721 standard,
+The name and design are based on Ethereum's ERC721 standard,
 with some enhancements. The types in here can be imported by
 contracts that wish to implement this spec, or by contracts that call
 to any standard bs721 contract.
@@ -18,35 +18,35 @@ as well as an ID. The ID is an arbitrary string, unique within the contract.
 ### Messages
 
 `TransferNft{recipient, token_id}` -
-This transfers ownership of the token to `recipient` account. This is
+This transfers ownership of the token to the `recipient` account. This is
 designed to send to an address controlled by a private key and *does not*
 trigger any actions on the recipient if it is a contract.
 
-Requires `token_id` to point to a valid token, and `env.sender` to be
+Requires `token_id` to point to a valid token, and the `env.sender` to be
 the owner of it, or have an allowance to transfer it.
 
 `SendNft{contract, token_id, msg}` -
-This transfers ownership of the token to `contract` account. `contract`
+This transfers ownership of the token to the `contract` account. The `contract`
 must be an address controlled by a smart contract, which implements
 the Bs721Receiver interface. The `msg` will be passed to the recipient
 contract, along with the token_id.
 
-Requires `token_id` to point to a valid token, and `env.sender` to be
+Requires `token_id` to point to a valid token, and the `env.sender` to be
 the owner of it, or have an allowance to transfer it.
 
 `Approve{spender, token_id, expires}` - Grants permission to `spender` to
-transfer or send the given token. This can only be performed when
+transfer or send the given token. This can only be performed when the
 `env.sender` is the owner of the given `token_id` or an `operator`.
 There can be multiple spender accounts per token, and they are cleared once
 the token is transferred or sent.
 
 `Revoke{spender, token_id}` - This revokes a previously granted permission
-to transfer the given `token_id`. This can only be granted when
+to transfer the given `token_id`. This can only be granted when the
 `env.sender` is the owner of the given `token_id` or an `operator`.
 
 `ApproveAll{operator, expires}` - Grant `operator` permission to transfer or send
-all tokens owned by `env.sender`. This approval is tied to the owner, not the
-tokens and applies to any future token that the owner receives as well.
+all tokens owned by the `env.sender`. This approval is tied to the owner, not the
+tokens, and applies to any future token that the owner receives as well.
 
 `RevokeAll{operator}` - Revoke a previous `ApproveAll` permission granted
 to the given `operator`.
@@ -55,21 +55,21 @@ to the given `operator`.
 
 `OwnerOf{token_id, include_expired}` - Returns the owner of the given token,
 as well as anyone with approval on this particular token. If the token is
-unknown, returns an error. Return type is `OwnerOfResponse`. If
+unknown, returns an error. The returned type is `OwnerOfResponse`. If
 `include_expired` is set, show expired owners in the results, otherwise, ignore
 them.
 
 `Approval{token_id, spender, include_expired}` - Return an approval of `spender`
-about the given `token_id`. Return type is `ApprovalResponse`. If
+about the given `token_id`. The returned type is `ApprovalResponse`. If
 `include_expired` is set, show expired owners in the results, otherwise, ignore
 them.
 
-`Approvals{token_id, include_expired}` - Return all approvals that owner given
-access to. Return type is `ApprovalsResponse`. If `include_expired` is set, show
+`Approvals{token_id, include_expired}` - Return all approvals that owner has given
+access to. The return type is `ApprovalsResponse`. If `include_expired` is set, show
 expired owners in the results, otherwise, ignore them.
 
 `AllOperators{owner, include_expired, start_after, limit}` - List all
-operators that can access all of the owner's tokens. Return type is
+operators that can access all of the owner's tokens. The return type is
 `OperatorsResponse`. If `include_expired` is set, show expired owners in the
 results, otherwise, ignore them. If `start_after` is set, then it returns the
 first `limit` operators *after* the given one.
@@ -78,12 +78,12 @@ first `limit` operators *after* the given one.
 
 ### Receiver
 
-The counter-part to `SendNft` is `ReceiveNft`, which must be implemented by
+The counterpart to `SendNft` is `ReceiveNft`, which must be implemented by
 any contract that wishes to manage BS721 tokens. This is generally *not*
 implemented by any BS721 contract.
 
 `ReceiveNft{sender, token_id, msg}` - This is designed to handle `SendNft`
-messages. The address of the contract is stored in `env.sender`
+messages. The address of the contract is stored in the `env.sender`
 so it cannot be faked. The contract should ensure the sender matches
 the token contract it expects to handle, and not allow arbitrary addresses.
 
@@ -91,7 +91,7 @@ The `sender` is the original account requesting to move the token
 and `msg` is a `Binary` data that can be decoded into a contract-specific
 message. This can be empty if we have only one default action,
 or it may be a `ReceiveMsg` variant to clarify the intention. For example,
-if I send to an exchange, I can specify the price I want to list the token
+if I send tokens to an exchange, I can specify the price I want to list the token
 for.
 
 ## Metadata
@@ -99,7 +99,7 @@ for.
 ### Queries
 
 `ContractInfo{}` - This returns top-level metadata about the contract.
-Namely, `name`, `symbol` and `uri`.
+Namely, `name`, `symbol`, and `uri`.
 
 `NftInfo{token_id}` - This returns metadata about one particular token.
 The return value is based on *ERC721 Metadata JSON Schema*, but directly
@@ -127,7 +127,7 @@ pagination by taking the last result returned (a `token_id`) and using it
 as the `start_after` value in a future query.
 
 `Tokens{owner, start_after, limit}` - List all token_ids that belong to a given owner.
-Return type is `TokensResponse{tokens: Vec<token_id>}`.
+The return type is `TokensResponse{tokens: Vec<token_id>}`.
 
 `AllTokens{start_after, limit}` - Requires pagination. Lists all token_ids controlled by
 the contract.

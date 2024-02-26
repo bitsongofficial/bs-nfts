@@ -16,7 +16,7 @@ cw2             = "0.16.0"
 cw20            = "0.16.0"
 bs721           = { version = "0.1.0-alpha.1", path = "./packages/bs721" }
 bs721-base      = { version = "0.1.0-alpha.1", path = "./contracts/bs721-base" }
-bs721-royalty   = { version = "0.1.0-alpha.1", path = "./contracts/bs721-royalty" }
+bs721-royalties   = { version = "0.1.0-alpha.1", path = "./contracts/bs721-royalties" }
 cw-storage-plus = "0.16.0"
 cw-utils        = "0.16.0"
 schemars        = "0.8.10"
@@ -27,7 +27,7 @@ thiserror       = "1.0.31"
 codegen-units = 1
 incremental = false
 
-[profile.release.package.bs721-royalty]
+[profile.release.package.bs721-royalties]
 codegen-units = 1
 incremental = false
 

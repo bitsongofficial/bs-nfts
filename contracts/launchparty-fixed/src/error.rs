@@ -1,8 +1,8 @@
-use cosmwasm_std::{Coin, StdError};
+use cosmwasm_std::{StdError, Uint128};
 use cw_utils::PaymentError;
 use thiserror::Error;
 
-#[derive(Error, Debug)]
+#[derive(Error, Debug, PartialEq)]
 pub enum ContractError {
     #[error("{0}")]
     Std(#[from] StdError),
@@ -10,36 +10,51 @@ pub enum ContractError {
     #[error("{0}")]
     Payment(#[from] PaymentError),
 
-    #[error("Unauthorized")]
+    #[error("unauthorized")]
     Unauthorized {},
 
-    #[error("Price cannot be zero")]
-    ZeroPrice {},
-
-    #[error("Max editions cannot be zero")]
+    #[error("max editions cannot be zero")]
     ZeroEditions {},
 
-    #[error("BS721 contract already linked")]
-    Bs721AlreadyLinked {},
+    #[error("party duration cannot be zero")]
+    ZeroDuration {},
 
-    #[error("Royalty contract already linked")]
-    RoyaltyAlreadyLinked {},
+    #[error("BS721 contract already linked")]
+    Bs721BaseAlreadyLinked {},
+
+    #[error("royalties contract already linked")]
+    RoyaltiesAlreadyLinked {},
 
     #[error("BS721 contract not linked")]
     Bs721NotLinked {},
 
-    #[error("Unknown reply id")]
+    #[error("Royalties contract not linked")]
+    RoyaltiesNotLinked {},
+
+    #[error("unknown reply id")]
     UnknownReplyId {},
 
-    #[error("Contract is sold out")]
+    #[error("contract is sold out")]
     SoldOut {},
 
-    #[error("Coins sent are invalid")]
+    #[error("coins sent are invalid")]
     InvalidFunds {},
 
-    #[error("Invalid payment amount {0} != {1}")]
-    InvalidPaymentAmount(Coin, Coin),
+    #[error("invalid payment amount. Sent is {0} but required is {1}")]
+    InvalidPaymentAmount(Uint128, Uint128),
 
-    #[error("Launchpad not started")]
+    #[error("launchpad not started")]
     NotStarted {},
+
+    #[error("party has ended")]
+    PartyEnded {},
+
+    #[error("{profile} fee bps must be less than 10000")]
+    FeeBps { profile: String },
+
+    #[error("max number of pre-generated metadata reached")]
+    MaxMetadataReached {},
+
+    #[error("max number of mint, remaining: {remaining}")]
+    MaxPerAddressExceeded { remaining: u32 },
 }
