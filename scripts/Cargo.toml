@@ -1,0 +1,66 @@
+[package]
+name = "scripts"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/DA0-DA0/dao-contracts"
+version.workspace = true
+
+[dependencies]
+bs721                      = { path = "../packages/bs721", version = "0.2.0" }
+bs721-base                 = { path = "../contracts/collections/bs721-base", version = "0.2.0" }
+btsg-cw-orch               = { path = "../packages/cw-orch", version = "0.2.0" }
+cosmwasm-std.workspace     = true
+dotenv                     = { version = "0.15.0" }
+
+# Abstract Framework and CW-Orchestrator Dependencies
+abstract-std = "0.23.0"
+abstract-client = { version = "0.23.0",  features = ["interchain"] }
+abstract-interface = "0.23.1"
+anyhow = "1"
+clap = { version = "4.0.32", features = ["derive"] }
+cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "4.0.0" }
+cw-orch-interchain = { version = "0.3.0",  features = ["daemon"] }
+cw-orch-clone-testing = { version = "0.6.4" }
+cw-orch   = { version = "0.24.1", features = ["daemon"] }
+dirs = "5.0.1"
+env_logger = "0.10.0"
+log = "0.4.22"
+polytone = { package = "abstract-polytone", version = "1.0.5" }
+polytone-note = { package = "abstract-polytone-note", version = "3.0.0" }
+pretty_env_logger          = { version = "0.5.0" }
+reqwest = { version = "0.11.9" }
+serde                        = { version = "1.0.140", default-features = false, features = ["derive"] }
+serde_json = "1.0.79"
+tokio = "1.39.3"
+cw-orch-interchain-core = "0.5.0"
+
+[dev-dependencies]
+
+# Cargo CLI commands
+[[bin]]
+name = "connect-ibc"
+path = "src/bin/connect_ibc.rs"
+[[bin]]
+name = "create-remote-account"
+path = "src/bin/create_remote_account.rs"
+[[bin]]
+name = "deploy-ibc"
+path = "src/bin/deploy_ibc.rs"
+[[bin]]
+name = "deploy-modules"
+path = "src/bin/deploy_modules.rs"
+[[bin]]
+name = "full-deploy"
+path = "src/bin/full_deploy.rs"
+[[bin]]
+name = "ibc-test"
+path = "src/bin/ibc_test.rs"
+[[bin]]
+name = "manual-deploy"
+path = "src/bin/manual_deploy.rs"
+[[bin]]
+name = "migrate"
+path = "src/bin/migrate.rs"
+[[bin]]
+name = "create-nft-account"
+path = "src/bin/create_nft_account.rs"

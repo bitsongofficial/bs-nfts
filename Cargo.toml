@@ -1,8 +1,14 @@
 [workspace]
-members = ["packages/*", "contracts/*"]
+members = [
+ "packages/*", 
+ "contracts/collections/*",
+ "contracts/minters/*",
+ "contracts/factories/*",
+ "scripts"
+ ]
 
 [workspace.package]
-version       = "0.1.0-rc1"
+version       = "0.2.0"
 edition       = "2021"
 license       = "Apache-2.0"
 repository    = "https://github.com/bitsongofficial/bs-nfts"
@@ -10,22 +16,32 @@ homepage      = "https://bitsong.io"
 documentation = "https://docs.bitsong.io"
 
 [workspace.dependencies]
-cosmwasm-schema = "1.1.5"
-cosmwasm-std    = "1.1.5"
-cw2             = "0.16.0"
-cw20            = "0.16.0"
-cw721           = "0.18.0"
-cw721-base      = "0.18.0"
-bs721           = { version = "0.1.0-alpha.1", path = "./packages/bs721" }
-bs721-base      = { version = "0.1.0-alpha.1", path = "./contracts/bs721-base" }
-bs721-royalties = { version = "0.1.0-alpha.1", path = "./contracts/bs721-royalties" }
-bs721-factory   = { version = "0.1.0-alpha.1", path = "./contracts/bs721-factory" }
-cw-storage-plus = "0.16.0"
-cw-utils        = "0.16.0"
-cw-ownable      = "0.5.1"
-schemars        = "0.8.10"
-serde           = { version = "1.0.140", default-features = false, features = ["derive"] }
-thiserror       = "1.0.31"
+anyhow                       = { version = "1.0" }
+bs721                        = { version = "0.2.0", path = "./packages/bs721" }
+bs721-base                   = { version = "0.2.0", path = "./contracts/collections/bs721-base" }
+bs721-curve                  = { version = "0.2.0", path = "./contracts/collections/bs721-curve" }
+bs721-royalties              = { version = "0.2.0", path = "./contracts/collections/bs721-royalties" }
+bs721-factory                = { version = "0.2.0", path = "./contracts/factories/bs721-factory" }
+bs-controllers               = { version = "0.2.0", path = "./packages/controllers" }
+btsg-cw-orch                 = { version = "0.2.0", path = "./packages/cw-orch" }
+cosmwasm-schema              = "1.1.5"
+cosmwasm-std                 = "1.1.5"
+cw-controllers               = { version = "1.1.2" }
+cw2                          = "1.1"
+cw20                         = "0.16.0"
+cw721                        = "0.18.0"
+cw721-base                   = "0.18.0"
+cw-multi-test                = "1.1.0"
+cw-orch                      = "0.24.1"
+cw-ownable                   = "0.5.1"
+cw-storage-macro             = "1.2.0"
+cw-storage-plus              = "1.2.0" 
+cw-utils                     = "0.16.0"
+schemars                     = "0.8.10"
+semver                       = "1.0"
+serde                        = { version = "1.0.140", default-features = false, features = ["derive"] }
+thiserror                    = "1.0.31"
+url                          = "2.2.2"
 
 [profile.release.package.bs721-base]
 codegen-units = 1

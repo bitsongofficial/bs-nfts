@@ -10,7 +10,7 @@ OUTPUT_FILE="query_results.csv"
 # Write the CSV header
 echo "id,base_price,royalties,referral,protocol_fee,total_price" > "$OUTPUT_FILE"
 
-# Loop 250 times
+# Loop 1000 times
 for i in {1..1000}
 do
     # Modify QUERY_PRICE with the current loop value for 'amount'
