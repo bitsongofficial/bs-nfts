@@ -1,0 +1,21 @@
+[package]
+name        = "bs-controllers"
+authors     = [
+  "Shane Vitarana <s@noreply.publicawesome.com>",
+  "A Hardnett <hard-nett@users.noreply.github.com>"
+]
+description = "Common controllers we can reuse in many contracts"
+version     = { workspace = true }
+edition     = { workspace = true }
+homepage    = { workspace = true }
+repository  = { workspace = true }
+license     = { workspace = true }
+
+[dependencies]
+cosmwasm-schema = { workspace = true }
+cosmwasm-std    = { workspace = true }
+cw-storage-plus = { workspace = true }
+cw-utils        = { workspace = true }
+schemars        = { workspace = true }
+serde           = { workspace = true }
+thiserror       = { workspace = true }

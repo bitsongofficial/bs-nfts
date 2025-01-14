@@ -1,0 +1,52 @@
+use cosmwasm_schema::cw_serde;
+use cosmwasm_std::{Addr, Coin, Timestamp};
+use cw_storage_plus::{Item, Map};
+
+use crate::msg::PartyType;
+
+/// Smart contract configuration structure.
+#[cw_serde]
+pub struct Config {
+    /// Creator of the collection. If not provided it will be the sender. The minter is the only one who can create new NFTs.
+    pub creator: Addr,
+    /// Symbol of the NFT contract
+    pub symbol: String,
+    /// Name of the NFT contract
+    pub name: String,
+    /// URI of the NFT contract
+    pub uri: String,
+    /// Price of single nft minting.
+    pub price: Coin,
+    /// Maximum amount of token an address can mint.
+    pub max_per_address: Option<u32>,
+    /// ID of the next NFT that will be minted. The first NFT will be minted with ID == 1.
+    pub next_token_id: u32,
+    /// Address of the bs721 royalties contract.
+    pub payment_address: Addr,
+    pub seller_fee_bps: u16,
+    pub referral_fee_bps: u16,
+    pub protocol_fee_bps: u16,
+    /// Start time of the launchparty.
+    pub start_time: Timestamp,
+    /// End condition of the collection launchparty.
+    pub party_type: PartyType,
+    /// Address of the bs721 metadata-onchain token contract.
+    pub bs721_address: Option<Addr>,
+}
+
+/// Stores the contract's configuration
+pub const CONFIG: Item<Config> = Item::new("config");
+pub const ADDRESS_TOKENS: Map<&Addr, u32> = Map::new("address_tokens");
+
+#[cw_serde]
+pub struct Trait {
+    pub display_type: Option<String>,
+    pub trait_type: String,
+    pub value: String,
+}
+
+#[cw_serde]
+pub struct EditionMetadata {
+    pub name: String,
+    pub attributes: Option<Vec<Trait>>,
+}

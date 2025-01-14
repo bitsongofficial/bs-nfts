@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InstantiateMsg",
+  "type": "object",
+  "required": [
+    "contributors",
+    "denom"
+  ],
+  "properties": {
+    "contributors": {
+      "description": "NFT collection contibutors.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ContributorMsg"
+      }
+    },
+    "denom": {
+      "description": "Native denom distributed to contributors.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "ContributorMsg": {
+      "description": "Represents a contributor to the collection.",
+      "type": "object",
+      "required": [
+        "address",
+        "role",
+        "shares"
+      ],
+      "properties": {
+        "address": {
+          "description": "Contributor's address.",
+          "type": "string"
+        },
+        "role": {
+          "description": "Contributor's role",
+          "type": "string"
+        },
+        "shares": {
+          "description": "Amount of share associated to the contributor.",
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
